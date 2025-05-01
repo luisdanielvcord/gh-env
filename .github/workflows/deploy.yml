@@ -10,8 +10,8 @@ jobs:
   test:
     env: #Env variables at job level
       MONGODB_CLUSTER_ADDRESS: cluster0.re6nb2c.mongodb.net
-      MONGODB_USERNAME: Daniel
-      MONGODB_PASSWORD: MPYUbFA5iDUNpQhg
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
         run: npm test
       - name: Output information
         run: |
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}" #This won't be printed anymore when secrets are in place
   deploy:
     needs: test
     runs-on: ubuntu-latest
